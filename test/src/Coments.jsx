@@ -89,12 +89,14 @@ export default function Coments({ coments, coment, setNewComents }) {
           </button>
         </form>}
       {coment.reply.length > 0 && coment.reply.map((re) =>
-        <div className="flex justify-between items-cetner space-y-6">
+        <div className="flex justify-between items-center mb-1">
           <div className='pl-6 flex items-center space-x-2'>
             <User />
             <span className='rounded-full bg-gray-300 px-3 py-2'>{re.text}</span>
           </div>
-          <button className='pr-1' onClick={() => deleteReply(coment, re)}><Bin /></button>
+          <button className='pr-1 flex items-center' onClick={() => deleteReply(coment, re)}>
+            <Bin/>
+          </button>
         </div>
       )}
     </div>
