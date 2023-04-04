@@ -3,7 +3,7 @@ import { ReactComponent as TumbsUp } from './svg/ThumbsUp.svg';
 import { ReactComponent as User } from './svg/User.svg';
 
 
-export default function Coments({coments, likeComent, deleteComent, replyComent}){
+export default function Coments({coments, likeComent, deleteComent, replyComent, setNewComents}){
 
     const [showInput, setShowInput] = useState(false);
 
@@ -12,8 +12,18 @@ export default function Coments({coments, likeComent, deleteComent, replyComent}
     }
 
     const deleteReply=(coment, deleteComent)=>{
-        coment.reply.filter((re)=> 
-        re.text !== deleteComent.text)
+        const newReply = coment.reply.filter((re)=> 
+        re.text !== deleteComent.text);
+        coment.reply=newReply;
+
+        const copyComents = [...coments];
+        copyComents.forEach((co)=>{
+        if(co.text === coment.text){
+            console.log(co.text, coment.text);
+            co = coment;
+        }}
+        )
+        setNewComents(copyComents);
     }
 
     return(
@@ -43,8 +53,8 @@ export default function Coments({coments, likeComent, deleteComent, replyComent}
             </form>}
               {coment.reply.length > 0 && coment.reply.map((re) =>
               <div className="flex justify-between items-cetner">
-              <div>{re}</div>
-                <button className='bg-gray-400 rounded-sm text-sm p-1' onClick={() => deleteComent(coment)}>삭제</button> 
+              <div>{re.text}</div>
+                <button className='bg-gray-400 rounded-sm text-sm p-1' onClick={() => deleteReply(coment, re)}>삭제</button> 
               </div>
               )}
             </>

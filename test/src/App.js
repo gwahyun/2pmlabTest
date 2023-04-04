@@ -14,6 +14,11 @@ function App() {
     };
   }, [])
 
+  const setNewComents = (newComent) => {
+    setComents(newComent)
+    setLocalStorage(newComent);
+  }
+
   const submitCheck = (e) => {
     e.preventDefault();
 
@@ -115,7 +120,7 @@ function App() {
           )
         }
       </div> */}
-      <Coments coments={coments} likeComent={likeComent} deleteComent={deleteComent} replyComent={replyComent} />
+      <Coments coments={coments} likeComent={likeComent} deleteComent={deleteComent} replyComent={replyComent} setNewComents={setNewComents} />
     </div>
   );
 }
