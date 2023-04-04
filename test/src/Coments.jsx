@@ -70,10 +70,10 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   return (
     <div className="container mx-auto max-w-3xl">
-      <div className='flex justify-between items-center p-2'>
+      <div className='flex justify-between items-center p-1'>
         <div className='flex items-center space-x-2'>
-          <User className=' rounded-full' />
-          <span className="rounded-full bg-gray-300 px-2 py-1">{coment.text}</span>
+          <User className='rounded-full flex-none' />
+          <span className="rounded-full bg-gray-300 px-3 py-2">{coment.text}</span>
         </div>
         <div className='flex items-center'>
           <label onClick={(e) => likeComent(e, coment)}>
@@ -81,23 +81,23 @@ export default function Coments({ coments, coment, setNewComents }) {
             <input type='radio' className='hidden' />
           </label>
           <button onClick={() => showInputControl()}><Coment /></button>
-          <button className=' rounded-sm text-sm p-1' onClick={() => deleteComent(coment)}><Bin /></button>
+          <button className=' rounded-sm text-sm' onClick={() => deleteComent(coment)}><Bin /></button>
         </div>
       </div>
       {showInput &&
-        <form className='flex ml-10' onSubmit={(e) => { showInputControl(); replyComent(e, coment) }}>
+        <form className='flex ml-10 my-1' onSubmit={(e) => { showInputControl(); replyComent(e, coment) }}>
           <input name='reply' type='text' className="textInput" placeholder="답글을 입력해주세요" />
           <button type='submit' className='rounded-full bg-[#22372B] text-white px-3 py-1'>
             <Arrow className='w-4 h-8' fill='#fff' />
           </button>
         </form>}
       {coment.reply.length > 0 && coment.reply.map((re) =>
-        <div className="flex justify-between items-cetner space-y-4">
+        <div className="flex justify-between items-cetner space-y-6">
           <div className='pl-6 flex items-center space-x-2'>
             <User />
-            <span className='rounded-full bg-gray-300 px-2 py-1'>{re.text}</span>
+            <span className='rounded-full bg-gray-300 px-3 py-2'>{re.text}</span>
           </div>
-          <button className='pr-3' onClick={() => deleteReply(coment, re)}><Bin /></button>
+          <button className='pr-1' onClick={() => deleteReply(coment, re)}><Bin /></button>
         </div>
       )}
     </div>

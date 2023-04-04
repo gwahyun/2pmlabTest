@@ -23,6 +23,10 @@ function App() {
 
     const { value } = e.target.coment
 
+    if (value.trim() === '') {
+      return;
+    }
+
     const newComents = [...coments, {
       text: value,
       likes: false,
@@ -49,7 +53,7 @@ function App() {
       </div>
 
       <div className='container mx-auto max-w-3xl'>
-        <form className='flex space-x-2 drop-shadow-sm ' onSubmit={(e) => addComent(e)}>
+        <form className='flex space-x-2 drop-shadow-sm mb-1' onSubmit={(e) => addComent(e)}>
           <input name='coment' type='text' className='textInput' placeholder='댓글을 입력해주세요' />
           <button className='rounded-full bg-[#22372B] text-white px-3 py-1'>
             <Arrow className='w-4 h-8' fill='#fff' />
