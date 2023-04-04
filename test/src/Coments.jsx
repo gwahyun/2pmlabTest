@@ -14,7 +14,6 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   const replyComent = (event, replyComent) => {
     event.preventDefault();
-    console.log(event.target.reply.value)
     const replyText = event.target.reply.value;
 
     const copyComents = [...coments];
@@ -25,7 +24,6 @@ export default function Coments({ coments, coment, setNewComents }) {
       }
     }
     )
-    console.log(copyComents);
 
     setNewComents(copyComents);
   }
@@ -46,7 +44,6 @@ export default function Coments({ coments, coment, setNewComents }) {
     const copyComents = [...coments];
     copyComents.forEach((co) => {
       if (co.text === coment.text) {
-        console.log(co.text, coment.text);
         co = coment;
       }
     }
@@ -56,7 +53,7 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   const likeComent = (e, likeComent) => {
     e.preventDefault();
-    console.log(likeComent);
+
     const copyComents = [...coments];
 
     copyComents.forEach((coment) => {
@@ -76,7 +73,7 @@ export default function Coments({ coments, coment, setNewComents }) {
           <span className="rounded-full bg-gray-300 px-3 py-2">{coment.text}</span>
         </div>
         <div className='flex items-center'>
-          <label onClick={(e) => likeComent(e, coment)}>
+          <label onClick={(e) => likeComent(e, coment)} className='cursor-pointer'>
             <TumbsUp fill={coment.likes === true ? '#22372B' : '#fff'} />
             <input type='radio' className='hidden' />
           </label>

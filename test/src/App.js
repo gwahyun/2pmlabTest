@@ -61,8 +61,8 @@ function App() {
         </form>
       </div>
       {coments !== null &&
-        coments.map((coment) =>
-          <Coments coments={coments} coment={coment} setNewComents={setNewComents} />
+        coments.map((coment, i) =>
+          <Coments key={i} coments={coments} coment={coment} setNewComents={setNewComents} />
         )
       }
 
