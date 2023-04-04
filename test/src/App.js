@@ -88,12 +88,12 @@ function App() {
         <h2 className='bg-blue-400 p-2 text-white font-bold'>2PMlab</h2>
       </header>
       <div className='container mx-auto'>
-        <form className='flex' onSubmit={(e) => submitCheck(e)}>
-          <input name='coment' type='text' className='border rounded-sm px-2 py-1 w-full' placeholder='댓글을 입력해주세요' />
+        <form className='flex drop-shadow-sm ' onSubmit={(e) => submitCheck(e)}>
+          <input name='coment' type='text' className='border rounded-md p-2 w-full' placeholder='댓글을 입력해주세요' />
           <button>submit</button>
         </form>
       </div>
-      <hr />
+
       {/* <div>
         {coments !== null &&
           coments.map((coment) =>

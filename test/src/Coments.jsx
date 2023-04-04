@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReactComponent as TumbsUp } from './svg/ThumbsUp.svg';
 import { ReactComponent as User } from './svg/User.svg';
-
+import { ReactComponent as Bin } from './svg/Bin.svg';
 
 export default function Coments({coments, likeComent, deleteComent, replyComent, setNewComents}){
 
@@ -27,11 +27,11 @@ export default function Coments({coments, likeComent, deleteComent, replyComent,
     }
 
     return(
-        <div>
+        <div className="container mx-auto">
         {coments !== null &&
           coments.map((coment) =>
             <>
-              <div className='border-2 flex justify-between items-center'>
+              <div className='border-2 flex justify-between items-center p-2 rounded-md'>
                 <div className='flex'>
                   <User className='bg-gray-300 rounded-full' />
                   <span >{coment.text}</span>
@@ -43,7 +43,7 @@ export default function Coments({coments, likeComent, deleteComent, replyComent,
                     <input type='radio' className='hidden' />
                   </label>
                   <button onClick={()=>showInputControl()}>댓글</button>
-                  <button className='bg-gray-400 rounded-sm text-sm p-1' onClick={() => deleteComent(coment)}>삭제</button>
+                  <button className=' rounded-sm text-sm p-1' onClick={() => deleteComent(coment)}><Bin/></button>
                 </div>
               </div>
               {showInput && 
@@ -53,7 +53,7 @@ export default function Coments({coments, likeComent, deleteComent, replyComent,
             </form>}
               {coment.reply.length > 0 && coment.reply.map((re) =>
               <div className="flex justify-between items-cetner">
-              <div>{re.text}</div>
+              <div className='pl-6'>- {re.text}</div>
                 <button className='bg-gray-400 rounded-sm text-sm p-1' onClick={() => deleteReply(coment, re)}>삭제</button> 
               </div>
               )}
