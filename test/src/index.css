@@ -15,3 +15,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html{
+  @apply selection:bg-[#22372B] selection:text-white;
+}
+
+.hashTag>span{
+  @apply rounded-full border-2 px-2 py-1 drop-shadow-none
+}
+
+.textInput{
+  @apply border px-3 py-2 w-full rounded-full
+}
