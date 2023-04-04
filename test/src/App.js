@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Coments from './Coments';
 import Content from './Content';
 import { ReactComponent as Arrow } from './svg/arrows.svg'
+import { DateTime } from "luxon";
+
 function App() {
 
   const [coments, setComents] = useState([])
@@ -31,12 +33,12 @@ function App() {
       text: value,
       likes: false,
       reply: [],
+      date: DateTime.now().toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS),
     }];
 
     e.target.coment.value = '';
     setNewComents(newComents);
   }
-
 
 
   const setLocalStorage = (coments) => {
@@ -61,8 +63,8 @@ function App() {
         </form>
       </div>
       {coments !== null &&
-        coments.map((coment, i) =>
-          <Coments key={i} coments={coments} coment={coment} setNewComents={setNewComents} />
+        coments.map((coment) =>
+          <Coments key={coment.date} coments={coments} coment={coment} setNewComents={setNewComents} />
         )
       }
 

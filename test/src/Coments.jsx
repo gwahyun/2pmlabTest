@@ -4,6 +4,7 @@ import { ReactComponent as User } from './svg/User.svg';
 import { ReactComponent as Bin } from './svg/Bin.svg';
 import { ReactComponent as Coment } from './svg/Coment.svg';
 import { ReactComponent as Arrow } from './svg/arrows.svg'
+import { DateTime } from "luxon";
 export default function Coments({ coments, coment, setNewComents }) {
 
   const [showInput, setShowInput] = useState(false);
@@ -19,8 +20,8 @@ export default function Coments({ coments, coment, setNewComents }) {
     const copyComents = [...coments];
 
     copyComents.forEach((coment) => {
-      if (coment.text === replyComent.text) {
-        coment.reply = [...coment.reply, { text: replyText, likes: false }]
+      if (coment.date === replyComent.date) {
+        coment.reply = [...coment.reply, { text: replyText, likes: false,  date: DateTime.now().toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS), }]
       }
     }
     )
@@ -30,7 +31,7 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   const deleteComent = (deleteComent) => {
     const newComents = coments.filter((coment) =>
-      coment.text !== deleteComent.text
+      coment.date !== deleteComent.date
     );
 
     setNewComents(newComents);
@@ -38,12 +39,12 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   const deleteReply = (coment, deleteComent) => {
     const newReply = coment.reply.filter((re) =>
-      re.text !== deleteComent.text);
-    coment.reply = newReply;
+      re.date !== deleteComent.date);
+      coment.reply = newReply;
 
     const copyComents = [...coments];
     copyComents.forEach((co) => {
-      if (co.text === coment.text) {
+      if (co.date === coment.date) {
         co = coment;
       }
     }
@@ -57,7 +58,7 @@ export default function Coments({ coments, coment, setNewComents }) {
     const copyComents = [...coments];
 
     copyComents.forEach((coment) => {
-      if (coment.text === likeComent.text) {
+      if (coment.date === likeComent.date) {
         likeComent.likes ? coment.likes = false : coment.likes = true;
       }
     }
@@ -67,11 +68,13 @@ export default function Coments({ coments, coment, setNewComents }) {
 
   return (
     <div className="container mx-auto max-w-3xl">
+      <div className="flex flex-col"> 
       <div className='flex justify-between items-center p-1'>
         <div className='flex items-center space-x-2'>
           <User className='rounded-full flex-none' />
           <span className="rounded-full bg-gray-300 px-3 py-2">{coment.text}</span>
         </div>
+       
         <div className='flex items-center'>
           <label onClick={(e) => likeComent(e, coment)} className='cursor-pointer'>
             <TumbsUp fill={coment.likes === true ? '#22372B' : '#fff'} />
@@ -81,6 +84,8 @@ export default function Coments({ coments, coment, setNewComents }) {
           <button className=' rounded-sm text-sm' onClick={() => deleteComent(coment)}><Bin /></button>
         </div>
       </div>
+      <span className="text-sm text-gray-400 pl-10">{coment.date}</span>
+      </div>
       {showInput &&
         <form className='flex ml-10 my-1' onSubmit={(e) => { showInputControl(); replyComent(e, coment) }}>
           <input name='reply' type='text' className="textInput" placeholder="답글을 입력해주세요" />
@@ -89,7 +94,8 @@ export default function Coments({ coments, coment, setNewComents }) {
           </button>
         </form>}
       {coment.reply.length > 0 && coment.reply.map((re) =>
-        <div className="flex justify-between items-center mb-1">
+      <div className="flex flex-col">
+        <div className="flex justify-between items-center my-1">
           <div className='pl-6 flex items-center space-x-2'>
             <User />
             <span className='rounded-full bg-gray-300 px-3 py-2'>{re.text}</span>
@@ -97,6 +103,8 @@ export default function Coments({ coments, coment, setNewComents }) {
           <button className='pr-1 flex items-center' onClick={() => deleteReply(coment, re)}>
             <Bin/>
           </button>
+        </div>
+        <span className="text-sm text-gray-400 pl-16 ">{re.date}</span>
         </div>
       )}
     </div>
